@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fieldnotes | Demo Store</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#20312d;font:15px Inter,Segoe UI,sans-serif}
+    .wrap{max-width:1100px;margin:auto;padding:22px}.nav{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d7d2c8;padding-bottom:16px}
+    .logo{font-family:Georgia,serif;font-size:24px}.nav span:last-child{font-size:12px;color:#66746d}
+    .hero{padding:70px 0 42px;max-width:680px}.eyebrow{color:#6b8d72;text-transform:uppercase;letter-spacing:.15em;font-size:11px;font-weight:700}
+    h1{font:clamp(40px,7vw,72px)/1.02 Georgia,serif;letter-spacing:-.04em;margin:14px 0}
+    p{line-height:1.7;color:#69766f}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .product{border-radius:14px;background:#fff;padding:14px;box-shadow:0 10px 24px #29382c0c}
+    .art{height:150px;border-radius:10px;background:linear-gradient(145deg,#c8d6c3,#8ca99a);display:grid;place-items:center;font-size:42px}
+    .product:nth-child(2) .art{background:linear-gradient(145deg,#e9d8bd,#bd9871)}.product:nth-child(3) .art{background:linear-gradient(145deg,#d9d4e5,#9a8ab3)}
+    .product h2{font:20px Georgia,serif;margin:16px 0 4px}.price{color:#526a59;font-weight:700}.foot{padding:30px 0;color:#8a938c;font-size:12px}
+    @media(max-width:650px){.products{grid-template-columns:1fr}.hero{padding:48px 0 30px}}
+  </style>
+</head>
+<body><main class="wrap">
+  <nav class="nav"><span class="logo">fieldnotes</span><span>Small objects for slower days · DEMO STORE</span></nav>
+  <section class="hero"><span class="eyebrow">Independent deployment · 03</span><h1>Useful things.<br>Thoughtfully made.</h1><p>A responsive storefront demo. No real products or payments are offered; this page demonstrates web-app deployment only.</p></section>
+  <section class="products"><article class="product"><div class="art">✦</div><h2>Studio Journal</h2><p>Room for plans, sketches and everyday notes.</p><span class="price">$18 · demo</span></article><article class="product"><div class="art">◒</div><h2>Desk Vessel</h2><p>A quiet place for pens and small tools.</p><span class="price">$32 · demo</span></article><article class="product"><div class="art">⌁</div><h2>Canvas Tote</h2><p>Lightweight, simple and made for daily use.</p><span class="price">$24 · demo</span></article></section>
+  <footer class="foot">Portfolio storefront sample · No checkout functionality</footer>
+</main></body></html>

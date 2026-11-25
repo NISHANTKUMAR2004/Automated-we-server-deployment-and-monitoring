@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quick Quiz</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #101027; color: #f6f3ff; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; display: grid; place-items: center; margin: 0; padding: 22px; }
+    main { width: min(100%, 560px); padding: 30px; border: 1px solid #39345e; border-radius: 20px; background: linear-gradient(145deg, #242044, #17162f); box-shadow: 0 22px 60px #06061188; }
+    .top { display: flex; justify-content: space-between; color: #b7aaff; font-size: 13px; font-weight: 700; }
+    h1 { margin: 18px 0 24px; font-size: 30px; }
+    .answer { display: block; width: 100%; padding: 13px 15px; margin: 10px 0; border: 1px solid #454064; border-radius: 11px; color: #f6f3ff; background: #201e3b; text-align: left; font: inherit; cursor: pointer; }
+    .answer:hover:not(:disabled) { border-color: #a293ff; background: #302a55; }
+    .answer.correct { border-color: #40d49b; background: #173c36; }
+    .answer.wrong { border-color: #f27990; background: #472739; }
+    #feedback { min-height: 25px; margin: 17px 0; color: #c5bafa; }
+    #next { padding: 11px 16px; border: 0; border-radius: 9px; color: #211b42; background: #baabff; font: inherit; font-weight: 800; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="top"><span>QUICK QUIZ</span><span id="score">Score: 0</span></div>
+    <h1 id="question">Loading…</h1>
+    <div id="answers"></div>
+    <div id="feedback" aria-live="polite"></div>
+    <button id="next" type="button">Start quiz</button>
+  </main>
+  <script>
+    const questions = [
+      { q: 'Which service applies the server configuration?', a: ['Puppet', 'Browser', 'HTML'], correct: 0 },
+      { q: 'Which service checks host and service health?', a: ['Nginx', 'Nagios', 'CSS'], correct: 1 },
+      { q: 'Which server delivers these demo pages?', a: ['Nginx', 'Puppet', 'Git'], correct: 0 },
+    ];
+    let current = -1;
+    let points = 0;
+    let answered = false;
+    const title = document.getElementById('question');
+    const answers = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const next = document.getElementById('next');
+    const score = document.getElementById('score');
+    function showQuestion() {
+      current += 1;
+      answered = false;
+      feedback.textContent = '';
+      if (current >= questions.length) {
+        title.textContent = `Quiz complete — ${points} / ${questions.length}`;
+        answers.replaceChildren();
+        next.textContent = 'Play again';
+        current = -1;
+        points = 0;
+        return;
+      }
+      const item = questions[current];
+      title.textContent = `${current + 1}. ${item.q}`;
+      answers.replaceChildren(...item.a.map((text, index) => {
+        const button = document.createElement('button');
+        button.className = 'answer';
+        button.textContent = text;
+        button.addEventListener('click', () => {
+          if (answered) return;
+          answered = true;
+          const correct = index === item.correct;
+          if (correct) points += 1;
+          score.textContent = `Score: ${points}`;
+          button.classList.add(correct ? 'correct' : 'wrong');
+          feedback.textContent = correct ? 'Correct! Nice work.' : `Not quite — the answer is ${item.a[item.correct]}.`;
+          next.textContent = current === questions.length - 1 ? 'See results' : 'Next question';
+        });
+        return button;
+      }));
+      next.textContent = 'Choose an answer';
+    }
+    next.addEventListener('click', () => {
+      if (current === -1) {
+        points = 0;
+        score.textContent = 'Score: 0';
+      } else if (!answered) {
+        if (current < questions.length) return;
+      }
+      showQuestion();
+    });
+  </script>
+</body>
+</html>

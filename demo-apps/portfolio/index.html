@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northstar Cloud | Portfolio</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#071321;color:#eff7ff;font:16px Inter,Segoe UI,sans-serif}
+    .wrap{max-width:1080px;margin:auto;padding:28px 24px}.nav{display:flex;justify-content:space-between;align-items:center;color:#a8bed2}
+    .logo{color:#75d8c1;font-weight:800;letter-spacing:.08em}.pill{border:1px solid #24415b;border-radius:99px;padding:8px 13px;font-size:12px}
+    .hero{padding:105px 0 75px;max-width:740px}.eyebrow{color:#75d8c1;text-transform:uppercase;letter-spacing:.18em;font-size:12px}
+    h1{font-size:clamp(44px,8vw,82px);line-height:1.02;letter-spacing:-.06em;margin:18px 0}
+    p{color:#9cb2c7;line-height:1.7}.hero p{font-size:18px;max-width:570px}
+    .cta{display:inline-block;margin-top:18px;padding:13px 18px;background:#67d8bd;color:#06251f;border-radius:8px;text-decoration:none;font-weight:800}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{padding:22px;border:1px solid #1b3853;border-radius:14px;background:linear-gradient(145deg,#10263b,#0a1a2a)}
+    .card b{display:block;color:#78d8c0;margin-bottom:8px}.foot{padding:32px 0;color:#627d95;font-size:12px}
+    @media(max-width:650px){.hero{padding:70px 0 48px}.cards{grid-template-columns:1fr}}
+  </style>
+</head>
+<body><main class="wrap">
+  <nav class="nav"><span class="logo">NORTHSTAR / CLOUD</span><span class="pill">Deployed with Puppet</span></nav>
+  <section class="hero"><span class="eyebrow">Application deployment demo · 01</span><h1>Build calmly.<br>Ship confidently.</h1><p>A production-inspired project landing page, deployed to an EC2 web server and monitored by Nagios Core.</p><a class="cta" href="#services">Explore the stack ↓</a></section>
+  <section class="cards" id="services"><article class="card"><b>01 · Configure</b><span>Puppet declares the web-server configuration.</span></article><article class="card"><b>02 · Deploy</b><span>Versioned app files are published to Nginx.</span></article><article class="card"><b>03 · Observe</b><span>Nagios checks service health and HTTP response.</span></article></section>
+  <footer class="foot">Automated Web Application Deployment and Monitoring · Northstar demo</footer>
+</main></body></html>

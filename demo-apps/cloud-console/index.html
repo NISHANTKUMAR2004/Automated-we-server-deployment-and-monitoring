@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ops Console | Cloud Demo</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#080e1b;color:#ecf2ff;font:14px Inter,Segoe UI,sans-serif}
+    .shell{max-width:1100px;margin:auto;padding:24px}.top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1e2b43;padding-bottom:18px}
+    .brand{font-weight:800;letter-spacing:.1em;color:#a99aff}.state{color:#54d9a8;background:#102b28;border:1px solid #1a5145;padding:8px 12px;border-radius:99px}
+    h1{font-size:clamp(30px,5vw,50px);margin:38px 0 8px;letter-spacing:-.04em}.sub{color:#8798b5;margin-bottom:28px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.tile{background:linear-gradient(145deg,#151f36,#0c1527);border:1px solid #273251;border-radius:14px;padding:22px}
+    .tile span{color:#8f9dbc;font-size:12px}.tile strong{display:block;font-size:28px;margin-top:16px}.ok{color:#58dcb2}.blue{color:#6caeff}.violet{color:#b09aff}
+    .activity{margin-top:16px;padding:22px;border:1px solid #273251;background:#0d1729;border-radius:14px}.line{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #1d2940;color:#9eacc6}
+    .line:last-child{border:0}.tag{color:#69d7b6;font-size:11px}@media(max-width:650px){.grid{grid-template-columns:1fr}.shell{padding:18px}}
+  </style>
+</head>
+<body><main class="shell">
+  <header class="top"><span class="brand">OPS / CLOUD CONSOLE</span><span class="state">● DEMO ENVIRONMENT</span></header>
+  <h1>Infrastructure at a glance.</h1><p class="sub">A static operations-console demo deployed as an independent web application.</p>
+  <section class="grid"><article class="tile"><span>WEB TIER</span><strong class="ok">ONLINE</strong></article><article class="tile"><span>DEPLOYMENT</span><strong class="blue">PUPPET</strong></article><article class="tile"><span>OBSERVABILITY</span><strong class="violet">NAGIOS</strong></article></section>
+  <section class="activity"><div class="line"><span>Application package</span><span class="tag">READY</span></div><div class="line"><span>HTTP health probe</span><span class="tag">MONITORED</span></div><div class="line"><span>Configuration state</span><span class="tag">DECLARED</span></div></section>
+</main></body></html>

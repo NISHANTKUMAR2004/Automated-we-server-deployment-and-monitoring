@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deployable Dummy App</title>
+    <style>
+      :root { font-family: Inter, Arial, sans-serif; background: #07111f; color: #eaf4ff; }
+      body { min-height: 100vh; margin: 0; display: grid; place-items: center; }
+      main { width: min(680px, calc(100% - 40px)); text-align: center; }
+      .card { border: 1px solid #1d456b; border-radius: 18px; padding: 48px 24px; background: linear-gradient(145deg, #102a46, #091827); box-shadow: 0 24px 70px rgba(0,0,0,.35); }
+      .badge { display: inline-block; border-radius: 999px; padding: 7px 12px; color: #58ddb2; background: rgba(88,221,178,.12); font-size: 13px; }
+      h1 { margin-bottom: 12px; }
+      p { color: #96aec5; }
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+      .metric { border: 1px solid rgba(130, 170, 211, .12); border-radius: 12px; padding: 18px 10px; background: rgba(31, 58, 86, .22); }
+      .metric strong { display: block; color: #56dcb1; font-size: 18px; }
+      .metric span { display: block; margin-top: 6px; color: #91a7bc; font-size: 11px; }
+      @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="card">
+        <span class="badge">Deployment successful</span>
+        <h1>Dummy Monitoring Demo App</h1>
+        <p>This container is ready for Docker, Nginx and Puppet deployment demonstrations.</p>
+        <div class="grid">
+          <div class="metric"><strong>Nginx</strong><span>Web delivery</span></div>
+          <div class="metric"><strong>Nagios</strong><span>Service monitoring</span></div>
+          <div class="metric"><strong>Puppet</strong><span>Configuration management</span></div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

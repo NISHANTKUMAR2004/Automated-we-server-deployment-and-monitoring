@@ -2,12 +2,18 @@
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
-    env_file:
-      - .env
+      context: .
+      dockerfile: backend/Dockerfile
+      target: backend
+    environment:
+      EC2_HOST: ${EC2_HOST:-15.135.200.112}
+      EC2_USER: ${EC2_USER:-ubuntu}
+      SSH_KEY_PATH: /run/secrets/ec2.pem
+      NAGIOS_STATUS_PATH: ${NAGIOS_STATUS_PATH:-/var/lib/nagios4/status.dat}
+    volumes:
+      - ${SSH_KEY_PATH:-D:\aws-keys\automated-server-monitoring-key.pem}:/run/secrets/ec2.pem:ro
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8001:8000"
     restart: unless-stopped
 
   frontend:
@@ -15,5 +21,13 @@
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:80"
+      - "127.0.0.1:3000:80"
+    restart: unless-stopped
+
+  dummy-app:
+    build:
+      context: ./dummy-app
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8082:80"
     restart: unless-stopped

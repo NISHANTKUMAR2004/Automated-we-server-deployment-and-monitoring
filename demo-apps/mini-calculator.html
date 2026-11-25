@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Calculator</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #111820; color: #eef4fa; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; display: grid; place-items: center; margin: 0; padding: 22px; }
+    main { width: min(100%, 360px); padding: 20px; border: 1px solid #30404e; border-radius: 20px; background: #1b2731; box-shadow: 0 24px 70px #0007; }
+    .label { margin: 3px 4px 12px; color: #9fb3c4; font-size: 13px; }
+    #display { width: 100%; height: 76px; padding: 12px; margin-bottom: 12px; border: 1px solid #334956; border-radius: 12px; color: #96f0d0; background: #0e171e; font-size: 32px; text-align: right; }
+    .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+    button { min-height: 58px; border: 1px solid #344552; border-radius: 12px; color: #eaf3fa; background: #263640; font: inherit; font-size: 19px; cursor: pointer; }
+    button:hover { filter: brightness(1.2); }
+    button.operator { color: #8fe6ca; background: #193d3b; }
+    button.equals { color: #0d261f; background: #74dfba; font-weight: 900; }
+    button.clear { color: #ffb4a9; background: #492d31; }
+    footer { margin-top: 15px; color: #899eae; font-size: 12px; text-align: center; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="label">MINI CALCULATOR · LIVE DEMO</div>
+    <output id="display" aria-label="Calculator display">0</output>
+    <div class="keys">
+      <button class="clear" data-action="clear">AC</button>
+      <button class="operator" data-operation="/">÷</button>
+      <button class="operator" data-operation="*">×</button>
+      <button class="operator" data-operation="-">−</button>
+      <button data-digit="7">7</button><button data-digit="8">8</button><button data-digit="9">9</button>
+      <button class="operator" data-operation="+">+</button>
+      <button data-digit="4">4</button><button data-digit="5">5</button><button data-digit="6">6</button>
+      <button class="equals" data-action="equals">=</button>
+      <button data-digit="1">1</button><button data-digit="2">2</button><button data-digit="3">3</button>
+      <button data-action="decimal">.</button>
+      <button data-digit="0">0</button><button data-action="backspace">⌫</button>
+    </div>
+    <footer>All calculations run right here in your browser.</footer>
+  </main>
+  <script>
+    const display = document.getElementById('display');
+    let current = '0';
+    let stored = null;
+    let operation = null;
+    let replaceCurrent = false;
+    function render() { display.textContent = current; }
+    document.querySelector('.keys').addEventListener('click', (event) => {
+      const button = event.target.closest('button');
+      if (!button) return;
+      if (button.dataset.digit !== undefined) {
+        current = replaceCurrent || current === '0' ? button.dataset.digit : current + button.dataset.digit;
+        replaceCurrent = false;
+      } else if (button.dataset.action === 'clear') {
+        current = '0'; stored = null; operation = null; replaceCurrent = false;
+      } else if (button.dataset.action === 'backspace') {
+        current = current.length > 1 ? current.slice(0, -1) : '0';
+      } else if (button.dataset.action === 'decimal') {
+        if (replaceCurrent) { current = '0'; replaceCurrent = false; }
+        if (!current.includes('.')) current += '.';
+      } else if (button.dataset.operation) {
+        stored = Number(current); operation = button.dataset.operation; replaceCurrent = true;
+      } else if (button.dataset.action === 'equals' && operation && stored !== null) {
+        const right = Number(current);
+        const result = operation === '+' ? stored + right
+          : operation === '-' ? stored - right
+          : operation === '*' ? stored * right
+          : right === 0 ? NaN : stored / right;
+        current = Number.isFinite(result) ? String(Number(result.toFixed(8))) : 'Error';
+        stored = null; operation = null; replaceCurrent = true;
+      }
+      render();
+    });
+  </script>
+</body>
+</html>
