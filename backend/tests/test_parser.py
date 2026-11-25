@@ -1,4 +1,5 @@
 ﻿from backend.app.nagios_parser import parse_nagios_status
+from pathlib import Path
 
 
 SAMPLE_STATUS = """
@@ -36,6 +37,20 @@ def test_empty_status():
 
     assert result["summary"]["total_services"] == 0
     assert result["services"] == []
+
+
+def test_uploaded_app_nginx_route_serves_the_matching_index_file():
+    route_config = (
+        Path(__file__).resolve().parents[2]
+        / "puppet"
+        / "files"
+        / "ams-demo-apps.conf"
+    ).read_text(encoding="utf-8")
+
+    assert "location ~ ^/apps/(uploaded-[a-z0-9-]+)/?$ {" in route_config
+    assert "root /var/www/ams-demo;" in route_config
+    assert "try_files /$1/index.html =404;" in route_config
+    assert 'add_header Cache-Control "no-store, no-cache, must-revalidate" always;' in route_config
 
 
 def test_mixed_service_state_counts():
